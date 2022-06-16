@@ -22,6 +22,8 @@ class SimpleImageUpload extends HTMLElement {
 
   disconnectedCallback() {
     console.log('Custom square element removed from page.');
+    this.querySelector('#archivo')
+      .removeEventListener('change', this);
   }
 
   adoptedCallback() {
@@ -36,7 +38,7 @@ class SimpleImageUpload extends HTMLElement {
   }
 
   #readFile(event) {
-    console.log('readFile', event.target)
+    console.log('readFile', event.target);
     const imagen = event.target.files[0];
     const lector = new FileReader();
 
@@ -67,10 +69,13 @@ class SimpleImageUpload extends HTMLElement {
     console.log('selected', element);
 
     this.querySelector('#archivo')
-      .addEventListener('change', (event) => {
-        this.#readFile(event);
-      }, false);
-    //
+      .addEventListener('change', this);
+  }
+
+  handleEvent(event) {
+    console.log('hanlde even', event);
+    if (event.type === 'change')
+      this.#readFile(event);
   }
 }
 
