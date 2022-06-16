@@ -9,7 +9,7 @@ html {
   font-family: 'Cabin', sans-serif;
 }
 
-simple-file-upload {
+simple-image-upload {
   width: 100%;
   min-height: 400px;
   margin-top: 10%;
@@ -17,7 +17,7 @@ simple-file-upload {
   background-color: red;
 }
 
-simple-file-upload .input-container {
+simple-image-upload .input-container {
   text-align: center;
   margin: 20px auto;
   padding: 20px;
@@ -30,7 +30,7 @@ simple-file-upload .input-container {
   display: inline-block;
 }
 
-simple-file-upload input[type=file] {
+simple-image-upload input[type=file] {
   cursor: inherit;
   display: block;
   font-size: 999px;
@@ -44,7 +44,7 @@ simple-file-upload input[type=file] {
   top: 0;
 }
 
-simple-file-upload .preview-container {
+simple-image-upload .preview-container {
   margin: 0 auto;
   width: 200px;
   min-height: 200px;
@@ -53,7 +53,7 @@ simple-file-upload .preview-container {
   border-radius: 4px;
 }
 
-simple-file-upload .preview-container > img {
+simple-image-upload .preview-container > img {
   margin: 0;
   width: 100%;
 }

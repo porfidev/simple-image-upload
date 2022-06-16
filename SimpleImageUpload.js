@@ -7,7 +7,7 @@ class SimpleImageUpload extends HTMLElement {
     super();
     // this.attachShadow({ mode: "open" });
     this.file = 'voy a ser un archivo';
-    console.log('los artibutos', this.getAttributeNames())
+    console.log('los artibutos', this.getAttributeNames());
   }
 
   static get observedAttributes() {
@@ -16,7 +16,7 @@ class SimpleImageUpload extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     console.log('Custom square element attributes changed.');
-   console.log(name, oldValue, newValue);
+    console.log(name, oldValue, newValue);
     //updateStyle(this);
   }
 
@@ -28,9 +28,29 @@ class SimpleImageUpload extends HTMLElement {
     console.log('Custom square element moved to new page.');
   }
 
+  #showImage(event) {
+    const imagenSource = event.target.result;
+    const previewImage = this.querySelector('#preview');
+
+    previewImage.src = imagenSource;
+  }
+
+  #readFile(event) {
+    console.log('readFile', event.target)
+    const imagen = event.target.files[0];
+    const lector = new FileReader();
+
+    lector.addEventListener('load', (progress) => {
+      console.log('imagen cargada', progress);
+      this.#showImage(progress);
+    }, false);
+
+    lector.readAsDataURL(imagen);
+  }
+
   connectedCallback() {
     console.log('Custom square element added to page.');
-    console.log(this.shadowRoot)
+    console.log(this.shadowRoot);
 
     //this.shadowRoot.innerHTML = `
     this.innerHTML = `
@@ -43,9 +63,14 @@ class SimpleImageUpload extends HTMLElement {
         <img alt="uploadedFile" src="" id="preview" />
       </div>
     </div>`;
-    const element = this.querySelector('div#supremo')
-    console.log('selected',element);
+    const element = this.querySelector('div#supremo');
+    console.log('selected', element);
 
+    this.querySelector('#archivo')
+      .addEventListener('change', (event) => {
+        this.#readFile(event);
+      }, false);
+    //
   }
 }
 
